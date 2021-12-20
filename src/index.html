@@ -3,6 +3,62 @@
   <head>
     <meta charset="UTF-8" />
     <h1>smein si vcsertyh  <h1>
+        <style>
+        $navy: #37455a;
+$blue: #abbdd3;
+$cyan: #a3d9cb;
+$peach: #ff9d7a;
+$colors: (
+  $navy: #37455a;
+  $blue: #abbdd3;
+  $cyan: #a3d9cb;
+  $peach: #ff9d7a;
+)
+@mixin bg{
+  .bg-#{$color}{
+    background: $color;
+  }
+}
+
+// Text class definition
+@mixin text{
+  .text-#{$color}{
+    color: $color;
+  }
+}
+
+// Background class generation
+@each $color in $colors{
+  @include bg($color);
+}
+
+// Text class generation
+@each $color in $colors{
+  @include text($color);
+}
+$navy: #37455a;
+$blue: #abbdd3;
+$cyan: #a3d9cb;
+$peach: #ff9d7a;
+
+$colors: (
+  navy: $navy,
+  blue: $blue,
+  cyan: $cyan,
+  peach: $peach
+);
+
+@mixin gen-props($prefix, $property) {
+  @each $color-name, $color in $colors {
+    .#{$prefix}-#{$color-name} {
+      #{$property}: $color
+    }
+  }
+}
+
+@include gen-props('text', 'color');
+@include gen-props('bg', 'background');
+</style>
     <meta
       name="description"
       content="Used as a boilerplate for tasks in the 'HTML, CSS and SASS' course in boom.dev"
